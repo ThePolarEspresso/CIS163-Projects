@@ -5,10 +5,10 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /*****************************************************************
- * class description...
+ * A Stopwatch Program
  *
  * @author Anna Carvalho
- * @version
+ * @version 2/7/21
  *****************************************************************/
 
 public class StopWatch  {
@@ -36,7 +36,7 @@ public class StopWatch  {
 	 *  where 300 indicates milliseconds.  If a value is not specified, then
 	 *  it is set to zero.
 	 *
-	 *  @param startTime is the input string that represents the starting time
+	 *  @param startTime is the input string that represents the starting time.
 	 *
 	 * 	@throws IllegalArgumentException when the input string does not match
 	 * 	the proper format.
@@ -152,7 +152,8 @@ public class StopWatch  {
 	 *  A constructor that initializes the instance variables with
 	 *  the provided value.
 	 *
-	 *  @param stopWatch is the StopWatch input
+	 *  @param stopWatch is the StopWatch input that represents minutes (0-∞),
+	 *  seconds (0-59), and milliseconds (0-999).
 	 *
 	 * 	@throws IllegalArgumentException when stopWatch is equal to null.
 	 *******************************************************************/

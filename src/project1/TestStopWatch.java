@@ -14,101 +14,79 @@ public class TestStopWatch {
     public void Constructor_Default() {
         StopWatch s = new StopWatch();
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 0);
-        assertTrue(s.getMilliseconds() == 0);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 0
+                && s.getMilliseconds() == 0);
     }
 
     /******************************************************************
      Test Constructor with String Parameter
      *******************************************************************/
 
-    @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam_noInput() { new StopWatch(""); }
-
-    //BROKEN
-//    @Test (expected = IllegalArgumentException.class)
-//    public void BADConstructor_stringParam_null() { new StopWatch(null); }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam_excessColon() { new StopWatch(":"); }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam_excessRightColon() { new StopWatch("1:2:"); }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam_excessLeftColon() { new StopWatch(":1:2"); }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam_excessInput() { new StopWatch("3:3:3:3"); }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam_characters() { new StopWatch("!@#$%^&*()"); }
-
     @Test
     public void Constructor_stringParam_3Input() {
         StopWatch s = new StopWatch("1:2:3");
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 3);
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_stringParam3Input_negMin() { StopWatch s = new StopWatch("-1:2:3"); }
+    public void BADConstructor_stringParam3Input_negMin() { new StopWatch("-1:2:3"); }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_negMinSec()
     {
-        StopWatch s = new StopWatch("-1:-2:3");
+        new StopWatch("-1:-2:3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_negMinMilli()
     {
-        StopWatch s = new StopWatch("-1:2:-3");
+        new StopWatch("-1:2:-3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_negMinSecMilli()
     {
-        StopWatch s = new StopWatch("-1:-2:-3");
+        new StopWatch("-1:-2:-3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_negSec()
     {
-        StopWatch s = new StopWatch("1:-2:3");
+        new StopWatch("1:-2:3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_negSecMilli()
     {
-        StopWatch s = new StopWatch("1:-2:-3");
+        new StopWatch("1:-2:-3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_negMilli()
     {
-        StopWatch s = new StopWatch("1:2:-3");
+        new StopWatch("1:2:-3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_excessSec()
     {
-        StopWatch s = new StopWatch("1:60:3");
+        new StopWatch("1:60:3");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_excessMilli()
     {
-        StopWatch s = new StopWatch("1:2:1000");
+        new StopWatch("1:2:1000");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam3Input_excessSecMilli()
     {
-        StopWatch s = new StopWatch("1:60:1000");
+        new StopWatch("1:60:1000");
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -118,9 +96,9 @@ public class TestStopWatch {
     public void Constructor_stringParam_2Input() {
         StopWatch s = new StopWatch("1:2");
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 1);
-        assertTrue(s.getMilliseconds() == 2);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 1
+                && s.getMilliseconds() == 2);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -160,9 +138,9 @@ public class TestStopWatch {
     public void Constructor_stringParam_1Input() {
         StopWatch s = new StopWatch("1");
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 0);
-        assertTrue(s.getMilliseconds() == 1);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 0
+                && s.getMilliseconds() == 1);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -174,6 +152,30 @@ public class TestStopWatch {
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_stringParam1Input_alpha() { new StopWatch("a"); }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_null() {
+        String s = null;
+        new StopWatch(s);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_noInput() { new StopWatch(""); }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_excessColon() { new StopWatch(":"); }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_excessRightColon() { new StopWatch("1:2:"); }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_excessLeftColon() { new StopWatch(":1:2"); }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_excessInput() { new StopWatch("3:3:3:3"); }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void BADConstructor_stringParam_characters() { new StopWatch("!@#$%^&*()"); }
+
     /******************************************************************
      Test Constructor with Triple int Parameters
      *******************************************************************/
@@ -182,67 +184,65 @@ public class TestStopWatch {
     public void Constructor_3Param() {
         StopWatch s = new StopWatch(1,2,3);
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negMin()
     {
-        StopWatch s = new StopWatch(-1,2,3);
+        new StopWatch(-1,2,3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negMinSec()
     {
-        StopWatch s = new StopWatch(-1,-2,3);
+        new StopWatch(-1,-2,3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negMinMilli()
     {
-        StopWatch s = new StopWatch(-1,2,-3);
+        new StopWatch(-1,2,-3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negMinSecMilli()
     {
-        StopWatch s = new StopWatch(-1,-2,-3);
+        new StopWatch(-1,-2,-3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negSec()
     {
-        StopWatch s = new StopWatch(1,-2,3);
+        new StopWatch(1,-2,3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negSecMilli()
     {
-        StopWatch s = new StopWatch(1,-2,-3);
+        new StopWatch(1,-2,-3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_negMilli()
     {
-        StopWatch s = new StopWatch(1,2,-3);
+        new StopWatch(1,2,-3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_excessSec() {
-        StopWatch s = new StopWatch(1,60,3);
+        new StopWatch(1,60,3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_3Param_excessMilli() {
-        StopWatch s = new StopWatch(1,2,1000);
+        new StopWatch(1,2,1000);
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void BADConstructor_3Param_excessSecMilli() {
-        StopWatch s = new StopWatch(1,60,1000);
-    }
+    public void BADConstructor_3Param_excessSecMilli() { new StopWatch(1,60,1000); }
 
     /******************************************************************
      Test Constructor with Double int Parameters
@@ -252,9 +252,9 @@ public class TestStopWatch {
     public void Constructor_2Param() {
         StopWatch s = new StopWatch(1, 2);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 1);
-        assertTrue(s.getMilliseconds() == 2);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 1
+                && s.getMilliseconds() == 2);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -295,9 +295,9 @@ public class TestStopWatch {
     public void Constructor_1Param() {
         StopWatch s = new StopWatch(1);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 0);
-        assertTrue(s.getMilliseconds() == 1);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 0
+                && s.getMilliseconds() == 1);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -321,18 +321,18 @@ public class TestStopWatch {
 
     @Test
     public void Constructor_singleStopWatch() {
-        StopWatch s1 = new StopWatch(1, 2, 3);
+        StopWatch s1 = new StopWatch("1:2:3");
         StopWatch s2 = new StopWatch(s1);
 
-        assertTrue(s2.getMinutes() == 1);
-        assertTrue(s2.getSeconds() == 2);
-        assertTrue(s2.getMilliseconds() == 3);
+        assertTrue(s2.getMinutes() == 1
+                && s2.getSeconds() == 2
+                && s2.getMilliseconds() == 3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADConstructor_SWParam_null() {
-        StopWatch s1 = null;
-        StopWatch s2 = new StopWatch(s1);
+        StopWatch s = null;
+        new StopWatch(s);
     }
 
     /******************************************************************
@@ -341,33 +341,25 @@ public class TestStopWatch {
 
     @Test
     public void Equals_doubleStopWatch_equals() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        StopWatch s2 = new StopWatch(1, 2, 3);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("1:2:3");
 
         assertTrue(StopWatch.equals(s1, s2));
-        assertTrue(StopWatch.equals(s2, s1));
     }
 
     @Test
     public void Equals_doubleStopWatch_notEquals() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        StopWatch s2 = new StopWatch(3, 2, 1);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("2:3:4");
 
         assertFalse(StopWatch.equals(s1, s2));
-        assertFalse(StopWatch.equals(s2, s1));
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void BADEquals_doubleStopWatch_1stNull () {
-        StopWatch s = new StopWatch(1,2,3);
-        StopWatch.equals(s, null);
-    }
+    public void BADEquals_doubleStopWatch_1stNull () { StopWatch.equals(new StopWatch("1:2:3"), null); }
 
     @Test (expected = IllegalArgumentException.class)
-    public void BADEquals_doubleStopWatch_2ndNull () {
-        StopWatch s = new StopWatch(1,2,3);
-        StopWatch.equals(null, s);
-    }
+    public void BADEquals_doubleStopWatch_2ndNull () { StopWatch.equals(null, new StopWatch("1:2:3")); }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADEquals_doubleStopWatch_doubleNull () {
@@ -380,27 +372,22 @@ public class TestStopWatch {
 
     @Test
     public void Equals_singleObject_equals() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        StopWatch s2 = new StopWatch(1, 2, 3);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("1:2:3");
 
         assertTrue(s1.equals(s2));
-        assertTrue(s2.equals(s1));
     }
 
     @Test
     public void Equals_singleObject_notEquals() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        StopWatch s2 = new StopWatch(3, 2, 1);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("2:3:4");
 
         assertFalse(s1.equals(s2));
-        assertFalse(s2.equals(s1));
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void BADEquals_singleObject_null() {
-        StopWatch s = new StopWatch(1,2,3);
-        s.equals(null);
-    }
+    public void BADEquals_singleObject_null() { new StopWatch("1:2:3").equals(null); }
 
     /******************************************************************
      Test compareTo with Single StopWatch Parameter
@@ -408,76 +395,60 @@ public class TestStopWatch {
 
     @Test
     public void CompareTo_bigMin() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(0, 1, 1);
-        assertTrue(s1.compareTo(s2) > 0);
-    }
+        StopWatch s1 = new StopWatch("1:1:1");
+        StopWatch s2 = new StopWatch("0:1:1");
+
+        assertTrue(s1.compareTo(s2) > 0); }
 
     @Test
     public void CompareTo_bigSec() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(1, 0, 1);
+        StopWatch s1 = new StopWatch("1:1:1");
+        StopWatch s2 = new StopWatch("1:0:1");
+
         assertTrue(s1.compareTo(s2) > 0);
     }
 
     @Test
     public void CompareTo_bigMilli() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(1, 1, 0);
+        StopWatch s1 = new StopWatch("1:1:1");
+        StopWatch s2 = new StopWatch("1:1:0");
+
         assertTrue(s1.compareTo(s2) > 0);
     }
 
     @Test
     public void CompareTo_bigMin_reverse() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(0, 1, 1);
-        assertTrue(s2.compareTo(s1) < 0);
+        StopWatch s1 = new StopWatch("0:1:1");
+        StopWatch s2 = new StopWatch("1:1:1");
+
+        assertTrue(s1.compareTo(s2) < 0);
     }
 
     @Test
     public void CompareTo_bigSec_reverse() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(1, 0, 1);
-        assertTrue(s2.compareTo(s1) < 0);
+        StopWatch s1 = new StopWatch("1:0:1");
+        StopWatch s2 = new StopWatch("1:1:1");
+
+        assertTrue(s1.compareTo(s2) < 0);
     }
 
     @Test
     public void CompareTo_bigMilli_reverse() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(1, 1, 0);
-        assertTrue(s2.compareTo(s1) < 0);
+        StopWatch s1 = new StopWatch("1:1:0");
+        StopWatch s2 = new StopWatch("1:1:1");
+
+        assertTrue(s1.compareTo(s2) < 0);
     }
 
     @Test
     public void CompareTo_bigMilli_equal() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        StopWatch s2 = new StopWatch(1, 1, 1);
-        assertTrue(s2.compareTo(s1) == 0);
-    }
+        StopWatch s1 = new StopWatch("1:1:1");
+        StopWatch s2 = new StopWatch("1:1:1");
+
+        assertTrue(s1.compareTo(s2) == 0); }
 
     @Test (expected = IllegalArgumentException.class)
-    public void BADCompareTo_null() {
-        StopWatch s1 = new StopWatch(1, 1, 1);
-        s1.compareTo(null);
-    }
-
-    /******************************************************************
-     Test (private) convertToMilli with StopWatch Parameter
-     *******************************************************************/
-
-    //Any way to test this?? BROKEN
-//    @Test (expected = IllegalArgumentException.class)
-//    public void convertToMilli_SWParam_null() {
-//        StopWatch s1 = new StopWatch();
-//        s1.add(null);
-//    }
-//
-//    @Test (expected = IllegalArgumentException.class)
-//    public void convertToMilli_SWParam_null2() {
-//        StopWatch s1 = new StopWatch();
-//        StopWatch s2 = null;
-//        s1.add(s2);
-//    }
+    public void BADCompareTo_null() { new StopWatch("1:1:1").compareTo(null); }
 
     /******************************************************************
      Test add with Single int Parameter
@@ -486,19 +457,18 @@ public class TestStopWatch {
     @Test
     public void add_intParam() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.add(62003);
 
-        assertTrue(s.getMinutes() == 2);
-        assertTrue(s.getSeconds() == 4);
-        assertTrue(s.getMilliseconds() == 6);
+        assertTrue(s.getMinutes() == 2
+                && s.getSeconds() == 4
+                && s.getMilliseconds() == 6);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADadd_intParam_negInput() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
-        s.add(-1);
+        new StopWatch("1:2:3").add(-1);
     }
 
     /******************************************************************
@@ -508,26 +478,24 @@ public class TestStopWatch {
     @Test
     public void sub_intParam() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.sub(62003);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 0);
-        assertTrue(s.getMilliseconds() == 0);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 0
+                && s.getMilliseconds() == 0);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsub_intParam_negInput() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
-        s.sub(-1);
+        new StopWatch("1:2:3").sub(-1);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsub_intParam_negRemainder() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(0, 0, 1);
-        s.sub(10);
+        new StopWatch("0:0:1").sub(10);
     }
 
     /******************************************************************
@@ -537,20 +505,19 @@ public class TestStopWatch {
     @Test
     public void add_SWParam() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(1, 2, 3);
-        StopWatch s2 = new StopWatch(1, 2, 3);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("1:2:3");
         s1.add(s2);
 
-        assertTrue(s1.getMinutes() == 2);
-        assertTrue(s1.getSeconds() == 4);
-        assertTrue(s1.getMilliseconds() == 6);
+        assertTrue(s1.getMinutes() == 2
+                && s1.getSeconds() == 4
+                && s1.getMilliseconds() == 6);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADadd_SWParam_null() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
-        s.add(null);
+        new StopWatch("1:2:3").add(null);
     }
 
     /******************************************************************
@@ -560,28 +527,25 @@ public class TestStopWatch {
     @Test
     public void sub_SWParam() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(1, 2, 3);
-        StopWatch s2 = new StopWatch(1, 2, 3);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("1:2:3");
         s1.sub(s2);
 
-        assertTrue(s1.getMinutes() == 0);
-        assertTrue(s1.getSeconds() == 0);
-        assertTrue(s1.getMilliseconds() == 0);
+        assertTrue(s1.getMinutes() == 0
+                && s1.getSeconds() == 0
+                && s1.getMilliseconds() == 0);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsub_SWParam_negRemainder() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(1, 2, 3);
-        StopWatch s2 = new StopWatch(10, 2, 3);
-        s1.sub(s2);
+        new StopWatch("1:2:3").sub(new StopWatch("10:2:3"));
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsub_SWParam_null() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
-        s.sub(null);
+        new StopWatch("1:2:3").sub(null);
     }
 
     /******************************************************************
@@ -591,25 +555,25 @@ public class TestStopWatch {
     @Test
     public void inc_noParam() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(1, 2, 3);
-        s1.inc();
+        StopWatch s = new StopWatch("1:2:3");
+        s.inc();
 
-        assertTrue(s1.getMinutes() == 1);
-        assertTrue(s1.getSeconds() == 2);
-        assertTrue(s1.getMilliseconds() == 4);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 4);
     }
 
     @Test
     public void inc_noParam_looped() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
 
         for (int i = 0; i < 10000; i++)
-            s1.inc();
+            s.inc();
 
-        assertTrue(s1.getMinutes() == 1);
-        assertTrue(s1.getSeconds() == 12);
-        assertTrue(s1.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 12
+                && s.getMilliseconds() == 3);
     }
 
     /******************************************************************
@@ -619,32 +583,31 @@ public class TestStopWatch {
     @Test
     public void dec_noParam() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.dec();
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 2);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 2);
     }
 
     @Test
     public void dec_noParam_looped() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 20, 3);
+        StopWatch s = new StopWatch("1:20:3");
 
         for (int i = 0; i < 10000; i++)
             s.dec();
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 10);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 10
+                && s.getMilliseconds() == 3);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void dec_noParam_negRemainder() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(0, 0, 0);
-        s.dec();
+        new StopWatch().dec();
     }
 
     /******************************************************************
@@ -653,23 +616,17 @@ public class TestStopWatch {
 
     @Test
     public void toString_noParam() {
-        StopWatch s = new StopWatch(1, 2, 3);
-        assertEquals(s.toString(),"1:02:003");
+        assertEquals(new StopWatch("1:2:3").toString(),"1:02:003");
 
-        s = new StopWatch(10, 20, 30);
-        assertEquals(s.toString(),"10:20:030");
+        assertEquals( new StopWatch("10:20:30").toString(),"10:20:030");
 
-        s = new StopWatch(100, 20, 300);
-        assertEquals(s.toString(),"100:20:300");
+        assertEquals(new StopWatch("100:20:300").toString(),"100:20:300");
 
-        s = new StopWatch(0, 20, 300);
-        assertEquals(s.toString(),"0:20:300");
+        assertEquals(new StopWatch("0:20:300").toString(),"0:20:300");
 
-        s = new StopWatch(0, 0, 300);
-        assertEquals(s.toString(),"0:00:300");
+        assertEquals(new StopWatch("0:0:300").toString(),"0:00:300");
 
-        s = new StopWatch(0, 0, 0);
-        assertEquals(s.toString(),"0:00:000");
+        assertEquals(new StopWatch("0:0:0").toString(),"0:00:000");
     }
 
     /******************************************************************
@@ -678,8 +635,8 @@ public class TestStopWatch {
 
     @Test
     public void saveload_singleString() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        StopWatch s2 = new StopWatch(1,2,3);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("1:2:3");
 
         s1.save("file1");
         s1 = new StopWatch();
@@ -690,26 +647,22 @@ public class TestStopWatch {
 
     @Test (expected = IllegalArgumentException.class)
     public void save_singleString_noInput() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        s1.save("");
+        new StopWatch("1:2:3").save("");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void save_singleString_null() {
-        StopWatch s1 = new StopWatch(1,2,3);
-        s1.save(null);
+        new StopWatch("1:2:3").save(null);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void load_singleString_noInput() {
-        StopWatch s1 = new StopWatch(5,59,300);
-        s1.load("");
+        new StopWatch("1:2:3").load("");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void load_singleString_null() {
-        StopWatch s1 = new StopWatch(5,59,300);
-        s1.load(null);
+        new StopWatch("1:2:3").load(null);
     }
 
     /******************************************************************
@@ -720,124 +673,141 @@ public class TestStopWatch {
     public void setSuspended_boolParam_isTrue() {
         StopWatch.setSuspend(true);
 
-        assertTrue(StopWatch.isSuspended() == true);
+        assertTrue(StopWatch.isSuspended());
     }
 
     @Test
     public void setSuspended_boolParam_isFalse() {
         StopWatch.setSuspend(false);
 
-        assertTrue(StopWatch.isSuspended() == false);
+        assertTrue(!StopWatch.isSuspended());
     }
 
     @Test
     public void setSuspended_boolParam_addintParam() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.add(10000);
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 12);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 12
+                && s.getMilliseconds() == 3);
 
         StopWatch.setSuspend(true);
         s.add(10000);
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 12);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 12
+                && s.getMilliseconds() == 3);
     }
 
     @Test
     public void setSuspended_boolParam_addSWParam() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(1, 2, 3);
-        StopWatch s2 = new StopWatch(10, 20, 30);
+        StopWatch s1 = new StopWatch("1:2:3");
+        StopWatch s2 = new StopWatch("10:20:30");
         s1.add(s2);
 
-        assertTrue(s1.getMinutes() == 11);
-        assertTrue(s1.getSeconds() == 22);
-        assertTrue(s1.getMilliseconds() == 33);
+        assertTrue(s1.getMinutes() == 11
+                && s1.getSeconds() == 22
+                && s1.getMilliseconds() == 33);
 
         StopWatch.setSuspend(true);
         s1.add(s2);
 
-        assertTrue(s1.getMinutes() == 11);
-        assertTrue(s1.getSeconds() == 22);
-        assertTrue(s1.getMilliseconds() == 33);
+        assertTrue(s1.getMinutes() == 11
+                && s1.getSeconds() == 22
+                && s1.getMilliseconds() == 33);
     }
 
     @Test
     public void setSuspended_boolParam_subintParam() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.sub(10000);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 52);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 52
+                && s.getMilliseconds() == 3);
 
         StopWatch.setSuspend(true);
         s.sub(10000);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 52);
-        assertTrue(s.getMilliseconds() == 3);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 52
+                && s.getMilliseconds() == 3);
     }
 
     @Test
     public void setSuspended_boolParam_subSWParam() {
         StopWatch.setSuspend(false);
-        StopWatch s1 = new StopWatch(10, 20, 30);
-        StopWatch s2 = new StopWatch(1, 2, 3);
+        StopWatch s1 = new StopWatch("10:20:30");
+        StopWatch s2 = new StopWatch("1:2:3");
         s1.sub(s2);
 
-        assertTrue(s1.getMinutes() == 9);
-        assertTrue(s1.getSeconds() == 18);
-        assertTrue(s1.getMilliseconds() == 27);
+        assertTrue(s1.getMinutes() == 9
+                && s1.getSeconds() == 18
+                && s1.getMilliseconds() == 27);
 
         StopWatch.setSuspend(true);
         s1.sub(s2);
 
-        assertTrue(s1.getMinutes() == 9);
-        assertTrue(s1.getSeconds() == 18);
-        assertTrue(s1.getMilliseconds() == 27);
+        assertTrue(s1.getMinutes() == 9
+                && s1.getSeconds() == 18
+                && s1.getMilliseconds() == 27);
     }
 
     @Test
     public void setSuspend_boolParam_inc() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.inc();
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 4);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 4);
 
         StopWatch.setSuspend(true);
         s.inc();
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 4);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 4);
     }
 
     @Test
     public void setSuspend_boolParam_dec() {
         StopWatch.setSuspend(false);
-        StopWatch s = new StopWatch(1, 2, 3);
+        StopWatch s = new StopWatch("1:2:3");
         s.dec();
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 2);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 2);
 
         StopWatch.setSuspend(true);
         s.dec();
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 2);
-        assertTrue(s.getMilliseconds() == 2);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 2
+                && s.getMilliseconds() == 2);
+    }
+
+    /******************************************************************
+     Test getMinutes with No Parameters
+     *******************************************************************/
+
+    @Test
+    public void getMinutes_noParam() {
+        assertTrue(new StopWatch("1:0:0").getMinutes() == 1);
+
+        assertTrue(new StopWatch("12:0:0").getMinutes() == 12);
+
+        assertTrue(new StopWatch("123:0:0").getMinutes() == 123);
+
+        assertTrue(new StopWatch("123456789:0:0").getMinutes() == 123456789);
+
+        assertFalse(new StopWatch("9999:0:0").getMinutes() == 1);
     }
 
     /******************************************************************
@@ -849,15 +819,31 @@ public class TestStopWatch {
         StopWatch s = new StopWatch();
         s.setMinutes(1);
 
-        assertTrue(s.getMinutes() == 1);
-        assertTrue(s.getSeconds() == 0);
-        assertTrue(s.getMilliseconds() == 0);
+        assertTrue(s.getMinutes() == 1
+                && s.getSeconds() == 0
+                && s.getMilliseconds() == 0);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsetMinutes_1Param_negMin() {
-        StopWatch s = new StopWatch();
-        s.setMinutes(-1);
+        new StopWatch().setMinutes(-1);
+    }
+
+    /******************************************************************
+     Test getSeconds with No Parameters
+     *******************************************************************/
+
+    @Test
+    public void getSeconds_noParam() {
+        assertTrue(new StopWatch("0:1:0").getSeconds() == 1);
+
+        assertTrue(new StopWatch("0:12:0").getSeconds() == 12);
+
+        assertTrue(new StopWatch("0:34:0").getSeconds() == 34);
+
+        assertTrue(new StopWatch("0:56:0").getSeconds() == 56);
+
+        assertFalse(new StopWatch("0:9:0").getSeconds() == 1);
     }
 
     /******************************************************************
@@ -869,21 +855,34 @@ public class TestStopWatch {
         StopWatch s = new StopWatch();
         s.setSeconds(1);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 1);
-        assertTrue(s.getMilliseconds() == 0);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 1
+                && s.getMilliseconds() == 0);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsetSeconds_1Param_negSec() {
-        StopWatch s = new StopWatch();
-        s.setSeconds(-1);
+        new StopWatch().setSeconds(-1);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsetSeconds_1Param_excessSec() {
-        StopWatch s = new StopWatch();
-        s.setSeconds(60);
+        new StopWatch().setSeconds(60);
+    }
+
+    /******************************************************************
+     Test getMilliseconds with No Parameters
+     *******************************************************************/
+
+    @Test
+    public void getMilliseconds_noParam() {
+        assertTrue(new StopWatch("0:0:1").getMilliseconds() == 1);
+
+        assertTrue(new StopWatch("0:0:12").getMilliseconds() == 12);
+
+        assertTrue(new StopWatch("0:0:123").getMilliseconds() == 123);
+
+        assertFalse(new StopWatch("0:0:999").getMilliseconds() == 1);
     }
 
     /******************************************************************
@@ -895,20 +894,18 @@ public class TestStopWatch {
         StopWatch s = new StopWatch();
         s.setMilliseconds(1);
 
-        assertTrue(s.getMinutes() == 0);
-        assertTrue(s.getSeconds() == 0);
-        assertTrue(s.getMilliseconds() == 1);
+        assertTrue(s.getMinutes() == 0
+                && s.getSeconds() == 0
+                && s.getMilliseconds() == 1);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsetMilliseconds_1Param_negMilli() {
-        StopWatch s = new StopWatch();
-        s.setMilliseconds(-1);
+        new StopWatch().setMilliseconds(-1);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void BADsetMilliseconds_1Param_excessMilli() {
-        StopWatch s = new StopWatch();
-        s.setMilliseconds(1000);
+        new StopWatch().setMilliseconds(1000);
     }
 }

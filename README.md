@@ -1,4 +1,2 @@
 # Stopwatch
-CIS163 Project 1
-
-A simple stopwatch application.
+CIS163 Projecs - Winter 2021

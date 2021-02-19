@@ -1,4 +1,4 @@
-package project2;
+package GameRental;
 
 import java.io.Serializable;
 import java.text.DateFormat;

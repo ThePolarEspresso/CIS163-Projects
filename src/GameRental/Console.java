@@ -1,4 +1,4 @@
-package project2;
+package GameRental;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

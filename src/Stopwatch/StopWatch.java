@@ -1,4 +1,4 @@
-package project1;
+package Stopwatch;
 
 import java.io.*;
 import java.text.DecimalFormat;

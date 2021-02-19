@@ -1,4 +1,4 @@
-package project2;
+package GameRental;
 
 public enum ConsoleTypes
 {   NoSelection,

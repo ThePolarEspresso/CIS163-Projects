@@ -1,10 +1,9 @@
-package project1;
+package Stopwatch;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 
 /**
  * Write a description  here.

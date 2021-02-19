@@ -1,4 +1,4 @@
-package project1;
+package Stopwatch;
 
 import org.junit.Test;
 

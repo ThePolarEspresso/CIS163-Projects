@@ -1,4 +1,4 @@
-package project2;
+package GameRental;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,15 +10,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class RentConsoleDialog extends JDialog implements ActionListener {
-    private JTextField txtRenterName;
+public class RentGameDialog extends JDialog implements ActionListener {
+    private JTextField txtRentedName;
     private JTextField txtDateRentedOn;
     private JTextField txtDateDueDate;
+    private JTextField txtNameOfGame;
     private JComboBox<ConsoleTypes> comBoxConsoleType;
+
     private JButton okButton;
     private JButton cancelButton;
     private int closeStatus;
-    private Console console;
+    private Game game;
     public static final int OK = 0;
     public static final int CANCEL = 1;
 
@@ -27,44 +29,50 @@ public class RentConsoleDialog extends JDialog implements ActionListener {
      user to provide data and click on a button.
 
      @param parent reference to the JFrame application
-     @param console an instantiated object to be filled with data
+     @param game an instantiated object to be filled with data
      *********************************************************/
 
-    public RentConsoleDialog(JFrame parent, Console console) {
+    public RentGameDialog(JFrame parent, Game game) {
         // call parent and create a 'modal' dialog
         super(parent, true);
-        this.console = console;
+        this.game = game;
 
-        setTitle("Console dialog box");
+        setTitle("Game dialog box");
         closeStatus = CANCEL;
-        setSize(500,200);
+        setSize(400,200);
 
         // prevent user from closing window
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        txtRenterName = new JTextField("Roger",30);
-        txtDateRentedOn = new JTextField(25);
-        txtDateDueDate = new JTextField(25);
+        txtRentedName = new JTextField("Judy",30);
+        txtDateRentedOn = new JTextField(15);
+        txtDateDueDate = new JTextField(15);
+        txtNameOfGame = new JTextField("Game1", 15);
         comBoxConsoleType = new JComboBox<>(ConsoleTypes.values());
 
         Calendar currentDate = Calendar.getInstance();
-        SimpleDateFormat formatter= new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat formatter= new SimpleDateFormat("MM/dd/yyyy"); //format it as per your requirement
         String dateNow = formatter.format(currentDate.getTime());
         currentDate.add(Calendar.DATE, 1);
-        String datetomorrow = formatter.format(currentDate.getTime());
+        String dateTomorrow = formatter.format(currentDate.getTime());
 
         txtDateRentedOn.setText(dateNow);
-        txtDateDueDate.setText(datetomorrow);
+        txtDateDueDate.setText(dateTomorrow);
 
         JPanel textPanel = new JPanel();
-        textPanel.setLayout(new GridLayout(4,2));
+        textPanel.setLayout(new GridLayout(6,2));
+
+        textPanel.add(new JLabel(""));
+        textPanel.add(new JLabel(""));
 
         textPanel.add(new JLabel("Name of Renter: "));
-        textPanel.add(txtRenterName);
-        textPanel.add(new JLabel("Date Rented On "));
+        textPanel.add(txtRentedName);
+        textPanel.add(new JLabel("Date rented on: "));
         textPanel.add(txtDateRentedOn);
-        textPanel.add(new JLabel("Date Due (est.): "));
+        textPanel.add(new JLabel("Due date (est.): "));
         textPanel.add(txtDateDueDate);
+        textPanel.add(new JLabel("Name of the Gamed"));
+        textPanel.add(txtNameOfGame);
         textPanel.add(new JLabel("ConsoleType"));
         textPanel.add(comBoxConsoleType);
 
@@ -99,28 +107,26 @@ public class RentConsoleDialog extends JDialog implements ActionListener {
             Date d1 = null;
             Date d2 = null;
             try {
-                GregorianCalendar gregTemp = new GregorianCalendar();
+                GregorianCalendar rentOnTemp = new GregorianCalendar();
                 d1 = df.parse(txtDateRentedOn.getText());
-                gregTemp.setTime(d1);
-                console.setRentedOn(gregTemp);
+                rentOnTemp.setTime(d1);
+                game.setRentedOn(rentOnTemp);
 
-                gregTemp = new GregorianCalendar();
+                GregorianCalendar dueDateTemp = new GregorianCalendar();
                 d2 = df.parse(txtDateDueDate.getText());
-                gregTemp.setTime(d2);
-                console.setDueBack(gregTemp);
+                dueDateTemp.setTime(d2);
+                game.setDueBack(dueDateTemp);
+
+                game.setNameOfRenter(txtRentedName.getText());
+                game.setNameGame(txtNameOfGame.getText());
+
+                ConsoleTypes type = ((ConsoleTypes) comBoxConsoleType.getSelectedItem());
+
+                game.setConsole(type);
 
             } catch (ParseException e1) {
 //                  Do some thing good, what that is, I am not sure.
             }
-
-            console.setNameOfRenter(txtRenterName.getText());
-            console.setConsoleType((ConsoleTypes) comBoxConsoleType.getSelectedItem());
-
-            if ((ConsoleTypes) comBoxConsoleType.getSelectedItem() == ConsoleTypes.NoSelection) {
-                JOptionPane.showMessageDialog(null,"Select Console.");
-                closeStatus = CANCEL;
-            }
-
         }
 
         // make the dialog disappear
@@ -137,3 +143,4 @@ public class RentConsoleDialog extends JDialog implements ActionListener {
         return closeStatus;
     }
 }
+

@@ -1,4 +1,4 @@
-package project2;
+package GameRental;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

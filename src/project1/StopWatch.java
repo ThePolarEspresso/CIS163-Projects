@@ -490,9 +490,7 @@ public class StopWatch  {
 	 * 	to halt the mutating of all StopWatch objects.
 	 *******************************************************************/
 
-	public static void setSuspend(boolean suspend) {
-		StopWatch.suspend = suspend;
-	}
+	public static void setSuspend(boolean suspend) { StopWatch.suspend = suspend; }
 
 	/******************************************************************
 	 * 	A  method that returns true if suspend is true; false if it is false.

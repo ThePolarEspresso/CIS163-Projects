@@ -90,40 +90,45 @@ public class RentConsoleDialog extends JDialog implements ActionListener {
 
         JButton button = (JButton) e.getSource();
 
-        // if OK clicked the fill the object
         if (button == okButton) {
-            // save the information in the object
             closeStatus = OK;
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            df.setLenient(false);
 
             Date d1 = null;
             Date d2 = null;
             try {
-                GregorianCalendar gregTemp = new GregorianCalendar();
+                GregorianCalendar rentOnTemp = new GregorianCalendar();
                 d1 = df.parse(txtDateRentedOn.getText());
-                gregTemp.setTime(d1);
-                console.setRentedOn(gregTemp);
+                rentOnTemp.setTime(d1);
 
-                gregTemp = new GregorianCalendar();
+                GregorianCalendar dueDateTemp = new GregorianCalendar();
                 d2 = df.parse(txtDateDueDate.getText());
-                gregTemp.setTime(d2);
-                console.setDueBack(gregTemp);
+                dueDateTemp.setTime(d2);
+
+                if (rentOnTemp.compareTo(dueDateTemp) == 1) {
+                    JOptionPane.showMessageDialog(null, "Due date cannot come before the date rented on.");
+                    closeStatus = CANCEL;
+                }
+                if ((ConsoleTypes) comBoxConsoleType.getSelectedItem() == ConsoleTypes.NoSelection) {
+                    JOptionPane.showMessageDialog(null,"Select Console.");
+                    closeStatus = CANCEL;
+                }
+
+                console.setRentedOn(rentOnTemp);
+                console.setDueBack(dueDateTemp);
+                console.setNameOfRenter(txtRenterName.getText());
+                console.setConsoleType((ConsoleTypes) comBoxConsoleType.getSelectedItem());
 
             } catch (ParseException e1) {
-//                  Do some thing good, what that is, I am not sure.
-            }
-
-            console.setNameOfRenter(txtRenterName.getText());
-            console.setConsoleType((ConsoleTypes) comBoxConsoleType.getSelectedItem());
-
-            if ((ConsoleTypes) comBoxConsoleType.getSelectedItem() == ConsoleTypes.NoSelection) {
-                JOptionPane.showMessageDialog(null,"Select Console.");
+                JOptionPane.showMessageDialog(null, "Please enter a valid date in the format: MM/DD/YYYY");
+                closeStatus = CANCEL;
+            } catch (IllegalArgumentException e1) {
+                JOptionPane.showMessageDialog(null, "Please fill in all fields");
                 closeStatus = CANCEL;
             }
 
         }
-
-        // make the dialog disappear
         dispose();
     }
 

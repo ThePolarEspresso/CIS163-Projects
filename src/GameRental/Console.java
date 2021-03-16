@@ -17,7 +17,7 @@ public class Console extends Rental {
                    GregorianCalendar actualDateReturned,
                    ConsoleTypes consoleType) {
         super(nameOfRenter, rentedOn, dueBack, actualDateReturned);
-        this.consoleType = consoleType;
+        this.setConsoleType(consoleType);
     }
 
     public ConsoleTypes getConsoleType() {

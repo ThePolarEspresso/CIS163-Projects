@@ -98,11 +98,11 @@ public class RentGameDialog extends JDialog implements ActionListener {
 
         JButton button = (JButton) e.getSource();
 
-        // if OK clicked the fill the object
         if (button == okButton) {
-            // save the information in the object
             closeStatus = OK;
+
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            df.setLenient(false);
 
             Date d1 = null;
             Date d2 = null;
@@ -110,26 +110,32 @@ public class RentGameDialog extends JDialog implements ActionListener {
                 GregorianCalendar rentOnTemp = new GregorianCalendar();
                 d1 = df.parse(txtDateRentedOn.getText());
                 rentOnTemp.setTime(d1);
-                game.setRentedOn(rentOnTemp);
 
                 GregorianCalendar dueDateTemp = new GregorianCalendar();
                 d2 = df.parse(txtDateDueDate.getText());
                 dueDateTemp.setTime(d2);
-                game.setDueBack(dueDateTemp);
 
+                if (rentOnTemp.compareTo(dueDateTemp) == 1) {
+                    JOptionPane.showMessageDialog(null, "Due date cannot come before the date rented on.");
+                    closeStatus = CANCEL;
+                }
+
+                game.setRentedOn(rentOnTemp);
+                game.setDueBack(dueDateTemp);
                 game.setNameOfRenter(txtRentedName.getText());
                 game.setNameGame(txtNameOfGame.getText());
 
                 ConsoleTypes type = ((ConsoleTypes) comBoxConsoleType.getSelectedItem());
 
                 game.setConsole(type);
-
             } catch (ParseException e1) {
-//                  Do some thing good, what that is, I am not sure.
+                JOptionPane.showMessageDialog(null, "Please enter a valid date in the format: MM/DD/YYYY");
+                closeStatus = CANCEL;
+            } catch (IllegalArgumentException e1) {
+                JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                closeStatus = CANCEL;
             }
         }
-
-        // make the dialog disappear
         dispose();
     }
 

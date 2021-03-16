@@ -5,8 +5,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-//THIS IS THE SUPER CLASS OF EVERYBODY
-
 public abstract class
 Rental implements Serializable {
 
@@ -34,10 +32,10 @@ Rental implements Serializable {
                   GregorianCalendar rentedOn,
                   GregorianCalendar dueBack,
                   GregorianCalendar actualDateReturned) {
-        this.nameOfRenter = nameOfRenter;
-        this.rentedOn = rentedOn;
-        this.dueBack = dueBack;
-        this.actualDateReturned = actualDateReturned;
+        this.setNameOfRenter(nameOfRenter);
+        this.setRentedOn(rentedOn);
+        this.setDueBack(dueBack);
+        this.setActualDateReturned(actualDateReturned);
     }
 
     public String getNameOfRenter() {
@@ -45,6 +43,11 @@ Rental implements Serializable {
     }
 
     public void setNameOfRenter(String nameOfRenter) {
+        if (nameOfRenter == null)
+            throw new IllegalArgumentException("setNameOfRenter in Rental: nameOfRenter equals null");
+        if (nameOfRenter.length() == 0)
+            throw new IllegalArgumentException("setNameOfRenter in Rental: String length 0");
+
         this.nameOfRenter = nameOfRenter;
     }
 
@@ -53,6 +56,14 @@ Rental implements Serializable {
     }
 
     public void setRentedOn(GregorianCalendar rentedOn) {
+        if (rentedOn == null)
+            throw new IllegalArgumentException("setRentedOn in Rental: rentedOn equals null");
+//        if (this.dueBack != null) {
+//            if (this.rentedOn.compareTo(dueBack) == 1) {
+//                throw new IllegalArgumentException("setRentedOn in Rental: dueBack comes before rentedOn");
+//            }
+//        }
+
         this.rentedOn = rentedOn;
     }
 
@@ -61,6 +72,12 @@ Rental implements Serializable {
     }
 
     public void setActualDateReturned(GregorianCalendar actualDateReturned) {
+        if (this.rentedOn != null && actualDateReturned != null) {
+            if (this.rentedOn.compareTo(actualDateReturned) == 1) {
+                throw new IllegalArgumentException("setDueBack in Rental: actualDateReturned comes before rentedOn");
+            }
+        }
+
         this.actualDateReturned = actualDateReturned;
     }
 
@@ -69,11 +86,17 @@ Rental implements Serializable {
     }
 
     public void setDueBack(GregorianCalendar dueBack) {
+        if (dueBack == null)
+            throw new IllegalArgumentException("setDueBack w GC param in in Rental: equals null");
+//        if (this.rentedOn != null) {
+//            if (this.rentedOn.compareTo(dueBack) == 1) {
+//                throw new IllegalArgumentException("setDueBack in Rental: dueBack comes before rentedOn");
+//            }
+//        }
+
         this.dueBack = dueBack;
     }
 
-    // following code used for debugging only
-    // IntelliJ using the toString for displaying in debugger.
     @Override
     public String toString() {
         DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");

@@ -26,8 +26,8 @@ public class Game extends Rental {
                 String nameGame,
                 ConsoleTypes console) {
         super(nameOfRenter, rentedOn, dueBack, actualDateReturned);
-        this.nameGame = nameGame;
-        this.console = console;
+        this.setNameGame(nameGame);
+        this.setConsole(console);
     }
 
     public String getNameGame() {
@@ -35,6 +35,11 @@ public class Game extends Rental {
     }
 
     public void setNameGame(String nameGame) {
+        if (nameGame == null)
+            throw new IllegalArgumentException("setNameGame in Game: null input");
+        if (nameGame.equals(""))
+            throw new IllegalArgumentException("setNameGame in Game: string is empty");
+
         this.nameGame = nameGame;
     }
 

@@ -3,7 +3,9 @@ package GameRental;
 public enum ScreenDisplay {
     CurrentRentalStatus,
     ReturnedItems,
-    DueWithInWeek,
+    DueWithinWeek,
     DueWithinWeekGamesFirst,
-    Cap14DaysOverdue
+    Cap14DaysOverdue,
+    Everything,
+    LateRentals
 }

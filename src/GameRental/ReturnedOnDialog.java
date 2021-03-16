@@ -70,17 +70,17 @@ public class ReturnedOnDialog extends JDialog implements ActionListener {
 
 	/**************************************************************
 	 Respond to either button clicks
+
 	 @param e the action event that was just fired
 	 **************************************************************/
 	public void actionPerformed(ActionEvent e) {
 
 		JButton button = (JButton) e.getSource();
 
-		// if OK clicked the fill the object
 		if (button == okButton) {
-			// save the information in the object
 			closeStatus = OK;
 			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			df.setLenient(false);
 			GregorianCalendar gTemp = new GregorianCalendar();
 
 			Date d = null;
@@ -88,10 +88,13 @@ public class ReturnedOnDialog extends JDialog implements ActionListener {
 				d = df.parse(txtDate.getText());
 				gTemp.setTime(d);
 				unit.setActualDateReturned(gTemp);
-
 			} catch (ParseException e1) {
+				JOptionPane.showMessageDialog(null, "Please enter a valid date in the format: MM/DD/YYYY");
+				closeStatus = CANCEL;
+			} catch (IllegalArgumentException e1) {
+				JOptionPane.showMessageDialog(null, "Please enter a valid date after " + df.format(unit.getRentedOn().getTime()));
+				closeStatus = CANCEL;
 			}
-
 		}
 
 		// make the dialog disappear

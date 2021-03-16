@@ -25,6 +25,8 @@ public class GUIRentalStore extends JFrame implements ActionListener {
     private JMenuItem currentReturnedItemScn;
     private JMenuItem withIn7ItemScn;
     private JMenuItem sort30DaysItemScn;
+    private JMenuItem lateRentalsScn;
+    private JMenuItem everythingScn;
     private JMenuItem sortGameItemScn;
 
     private JPanel panel;
@@ -53,6 +55,8 @@ public class GUIRentalStore extends JFrame implements ActionListener {
         withIn7ItemScn = new JMenuItem("Within 7 Days Screen");
         sortGameItemScn = new JMenuItem("Within 7 Days Games First Screen");
         sort30DaysItemScn = new JMenuItem("Cap all Rentals 14 days late Screen");
+        lateRentalsScn = new JMenuItem("Late Rentals Screen");
+        everythingScn = new JMenuItem("Everything Screen");
 
         fileMenu.add(openSerItem);
         fileMenu.add(saveSerItem);
@@ -67,6 +71,8 @@ public class GUIRentalStore extends JFrame implements ActionListener {
         fileMenu.add(withIn7ItemScn);
         fileMenu.add (sortGameItemScn);
         fileMenu.add(sort30DaysItemScn);
+        fileMenu.add(lateRentalsScn);
+        fileMenu.add(everythingScn);
         fileMenu.addSeparator();
 
         actionMenu.add(rentConsoleItem);
@@ -91,12 +97,15 @@ public class GUIRentalStore extends JFrame implements ActionListener {
         withIn7ItemScn.addActionListener(this);
         sortGameItemScn.addActionListener(this);
         sort30DaysItemScn.addActionListener(this);
+        lateRentalsScn.addActionListener(this);
+        everythingScn.addActionListener(this);
 
         setJMenuBar(menus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel = new JPanel();
         dList = new ListModel();
+        dList.createList();
         jTable = new JTable(dList);
         scrollList = new JScrollPane(jTable);
         panel.add(scrollList);
@@ -118,7 +127,7 @@ public class GUIRentalStore extends JFrame implements ActionListener {
 
         if (withIn7ItemScn == comp) {
             GregorianCalendar dat = new GregorianCalendar();
-            dList.setDisplay(ScreenDisplay.DueWithInWeek);
+            dList.setDisplay(ScreenDisplay.DueWithinWeek);
         }
 
         if (sortGameItemScn == comp)
@@ -126,6 +135,12 @@ public class GUIRentalStore extends JFrame implements ActionListener {
 
         if (sort30DaysItemScn == comp)
             dList.setDisplay(ScreenDisplay.Cap14DaysOverdue);
+
+        if (lateRentalsScn == comp)
+            dList.setDisplay(ScreenDisplay.LateRentals);
+
+        if (everythingScn == comp)
+            dList.setDisplay(ScreenDisplay.Everything);
 
         if (openSerItem == comp || openTextItem == comp) {
             JFileChooser chooser = new JFileChooser();
@@ -154,13 +169,15 @@ public class GUIRentalStore extends JFrame implements ActionListener {
         if(e.getSource() == exitItem){
             System.exit(1);
         }
-        if(e.getSource() == rentConsoleItem){
-            Console Console = new Console();
-            RentConsoleDialog dialog = new RentConsoleDialog(this, Console);
-            if(dialog.getCloseStatus() == RentConsoleDialog.OK){
-                dList.add(Console);
-            }
+
+        if(e.getSource() == rentConsoleItem) {
+           Console Console = new Console();
+           RentConsoleDialog dialog = new RentConsoleDialog(this, Console);
+           if (dialog.getCloseStatus() == RentConsoleDialog.OK)
+               dList.add(Console);
+
         }
+
         if(e.getSource() == rentGameItem){
             Game gameOnly = new Game();
             RentGameDialog dialog = new RentGameDialog(this, gameOnly);
@@ -174,7 +191,7 @@ public class GUIRentalStore extends JFrame implements ActionListener {
             if (index != -1) {
                 GregorianCalendar dat = new GregorianCalendar();
 
-                Rental unit = dList.get(index);
+                Rental unit = dList.getFiltered(index);
                 ReturnedOnDialog dialog = new ReturnedOnDialog(this, unit);
 
                 JOptionPane.showMessageDialog(null,
@@ -188,6 +205,10 @@ public class GUIRentalStore extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new GUIRentalStore();
+        try {
+            new GUIRentalStore();
+        } catch (Throwable e) {
+            JOptionPane.showMessageDialog(null, "I'm sorry, my program unexpectedly quit.");
+        }
     }
 }
